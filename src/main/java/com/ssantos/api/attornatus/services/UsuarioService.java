@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssantos.api.attornatus.domain.Usuario;
+import com.ssantos.api.attornatus.exceptions.ObjectNotFoundException;
 import com.ssantos.api.attornatus.repositories.UsuarioRepository;
 
 @Service
@@ -16,6 +17,7 @@ public class UsuarioService {
 
 	public Usuario findById(Long id) {
 		Optional<Usuario> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado ID: " + id + ", Tipo: " + Usuario.class.getName()));
 	};
 }
