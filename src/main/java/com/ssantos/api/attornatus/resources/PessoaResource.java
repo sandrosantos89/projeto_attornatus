@@ -15,37 +15,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.ssantos.api.attornatus.domain.Usuario;
-import com.ssantos.api.attornatus.services.UsuarioService;
+import com.ssantos.api.attornatus.domain.Pessoa;
+import com.ssantos.api.attornatus.services.PessoaService;
 
 @RestController
-@RequestMapping(value = "/usuarios")
-public class UsuarioResource {
+@RequestMapping(value = "/pessoas")
+public class PessoaResource {
 
 	@Autowired
-	private UsuarioService service;
+	private PessoaService service;
 
 	@GetMapping
-	public ResponseEntity<List<Usuario>> findAll() {
-		List<Usuario> list = service.findAll();
+	public ResponseEntity<List<Pessoa>> findAll() {
+		List<Pessoa> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Usuario> findById(@PathVariable Long id) {
-		Usuario obj = this.service.findById(id);
+	public ResponseEntity<Pessoa> findById(@PathVariable Long id) {
+		Pessoa obj = this.service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario obj) {
-		Usuario newObj = service.update(id, obj);
+	public ResponseEntity<Pessoa> update(@PathVariable Long id, @RequestBody Pessoa obj) {
+		Pessoa newObj = service.update(id, obj);
 		return ResponseEntity.ok().body(newObj);
 	}
 
 	@PostMapping
-	public ResponseEntity<Usuario> create(@RequestBody Usuario obj) {
-		Usuario newObj = service.create(obj);
+	public ResponseEntity<Pessoa> create(@RequestBody Pessoa obj) {
+		Pessoa newObj = service.create(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}

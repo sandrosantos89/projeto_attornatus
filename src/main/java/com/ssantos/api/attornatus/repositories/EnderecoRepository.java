@@ -8,4 +8,5 @@ import com.ssantos.api.attornatus.domain.Endereco;
 @Repository
 public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 
+
 }

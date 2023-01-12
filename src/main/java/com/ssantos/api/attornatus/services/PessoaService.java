@@ -6,34 +6,34 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssantos.api.attornatus.domain.Usuario;
+import com.ssantos.api.attornatus.domain.Pessoa;
 import com.ssantos.api.attornatus.exceptions.ObjectNotFoundException;
-import com.ssantos.api.attornatus.repositories.UsuarioRepository;
+import com.ssantos.api.attornatus.repositories.PessoaRepository;
 
 @Service
-public class UsuarioService {
+public class PessoaService {
 
 	@Autowired
-	private UsuarioRepository repository;
+	private PessoaRepository repository;
 
-	public Usuario findById(Long id) {
-		Optional<Usuario> obj = repository.findById(id);
+	public Pessoa findById(Long id) {
+		Optional<Pessoa> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado ID: " + id + ", Tipo: " + Usuario.class.getName()));
+				"Objeto não encontrado ID: " + id + ", Tipo: " + Pessoa.class.getName()));
 	}
 
-	public List<Usuario> findAll() {
+	public List<Pessoa> findAll() {
 		return repository.findAll();
 	}
 
-	public Usuario update(Long id, Usuario obj) {
-		Usuario newObj = findById(id);
+	public Pessoa update(Long id, Pessoa obj) {
+		Pessoa newObj = findById(id);
 		newObj.setNome(obj.getNome());
 		newObj.setDataNascimento(obj.getDataNascimento());
 		return repository.save(newObj);
 	}
 
-	public Usuario create(Usuario obj) {
+	public Pessoa create(Pessoa obj) {
 		obj.setId(null);
 		return repository.save(obj);
 	}

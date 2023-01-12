@@ -33,6 +33,7 @@ public class EnderecoService {
 		newObj.setNumero(obj.getNumero());
 		newObj.setCidade(obj.getCidade());
 		newObj.setEnderecoPrincipal(obj.getEnderecoPrincipal());
+		newObj.setPessoa(obj.getPessoa());;
 		return repository.save(newObj);
 	}
 

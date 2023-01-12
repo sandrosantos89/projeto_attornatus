@@ -5,20 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "user")
-public class Usuario implements Serializable {
+@Table(name = "tb_pessoa")
+public class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,15 +29,14 @@ public class Usuario implements Serializable {
 	@NotEmpty(message = "Esse campo não pode estar vazio")
 	private String dataNascimento;
 
-	@JsonIgnore
-	@OneToMany
-	@JoinColumn(name = "endereco_id")
+
+	@OneToMany(mappedBy = "pessoa")
 	private List<Endereco> endereco = new ArrayList<>();
 
-	public Usuario() {
+	public Pessoa() {
 	}
 
-	public Usuario(Long id, String nome, String dataNascimento) {
+	public Pessoa(Long id, String nome, String dataNascimento) {
 		this.id = id;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
@@ -87,7 +83,7 @@ public class Usuario implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		Pessoa other = (Pessoa) obj;
 		return Objects.equals(id, other.id);
 	}
 

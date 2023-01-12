@@ -1,20 +1,20 @@
 package com.ssantos.api.attornatus.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "endereco")
+@Table(name = "tb_endereco")
 public class Endereco implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -38,20 +38,24 @@ public class Endereco implements Serializable {
 	@NotEmpty(message = "Esse campo não pode estar vazio")
 	private String enderecoPrincipal;
 
-	@OneToMany
-	@JoinColumn(name = "usuario_id")
-	private List<Usuario> usuario = new ArrayList<>();
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "pessoa_id")
+	private Pessoa pessoa;
 
 	public Endereco() {
 	}
 
-	public Endereco(Long id, String logradouro, String cep, String numero, String cidade, String enderecoPrincipal) {
+	public Endereco(Long id, String logradouro, String cep, String numero, String cidade, String enderecoPrincipal,
+			Pessoa pessoa) {
+		super();
 		this.id = id;
 		this.logradouro = logradouro;
 		this.cep = cep;
 		this.numero = numero;
 		this.cidade = cidade;
 		this.enderecoPrincipal = enderecoPrincipal;
+		this.pessoa = pessoa;
 	}
 
 	public Long getId() {
@@ -100,6 +104,14 @@ public class Endereco implements Serializable {
 
 	public void setEnderecoPrincipal(String enderecoPrincipal) {
 		this.enderecoPrincipal = enderecoPrincipal;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 }
