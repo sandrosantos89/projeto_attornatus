@@ -25,8 +25,8 @@ public class ProjetoAttornatusApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		List<Endereco> ed = new ArrayList<Endereco>();
-		Usuario u1 = new Usuario(null, "Sandro", "10/04/2022", ed);
+		
+		Usuario u1 = new Usuario(null, "Sandro", "10/04/2022");
 
 		usuario.saveAll(Arrays.asList(u1));
 	}

@@ -7,9 +7,7 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,18 +33,17 @@ public class Usuario implements Serializable {
 	private String dataNascimento;
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "user_id")
+	@OneToMany
+	@JoinColumn(name = "endereco_id")
 	private List<Endereco> endereco = new ArrayList<>();
 
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String nome, String dataNascimento, List<Endereco> endereco) {
+	public Usuario(Long id, String nome, String dataNascimento) {
 		this.id = id;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
-		this.endereco = endereco;
 	}
 
 	public Long getId() {
